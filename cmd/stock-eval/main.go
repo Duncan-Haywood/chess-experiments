@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/georgesp/chess-experiments/pkg/eval"
 	"github.com/notnil/chess"
 )
 
@@ -40,16 +41,12 @@ func EvaluateBoard(game *chess.Game) float64 {
 }
 
 func main() {
-	// Example usage
 	game := chess.NewGame()
-	fmt.Printf("Initial score: %.0f\n", EvaluateBoard(game))
-
-	// Make some moves
-	game.MoveStr("e4")
-	game.MoveStr("e5")
-	game.MoveStr("Nf3")
-	game.MoveStr("Nc6")
-	game.MoveStr("Bb5") // Ruy Lopez opening
-
-	fmt.Printf("Score after moves: %.0f\n", EvaluateBoard(game))
+	// generate all valid moves
+	validMoves := game.ValidMoves()
+	// make a move
+	game.Move(validMoves[0])
+	// get material difference
+	evaluator := eval.StockEvaluator{}
+	fmt.Println(evaluator.Eval(game.Position()))
 }
