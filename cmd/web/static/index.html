@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Experiments - Game Review</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chess Experiments</h1>
+            <p>Game Review & Analysis</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="board-section">
+                <div id="board" style="width: 500px"></div>
+                <div class="controls">
+                    <button id="startBtn" title="Go to start">⏮</button>
+                    <button id="prevBtn" title="Previous move">◀</button>
+                    <button id="nextBtn" title="Next move">▶</button>
+                    <button id="endBtn" title="Go to end">⏭</button>
+                    <button id="flipBtn" title="Flip board">🔄</button>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <div class="tabs">
+                    <button class="tab active" data-tab="pgn">PGN</button>
+                    <button class="tab" data-tab="analysis">Analysis</button>
+                    <button class="tab" data-tab="moves">Move List</button>
+                </div>
+                
+                <div class="tab-content" id="pgn-tab">
+                    <textarea id="pgn-input" placeholder="Paste PGN here..."></textarea>
+                    <button id="loadPgnBtn">Load Game</button>
+                </div>
+                
+                <div class="tab-content" id="analysis-tab" style="display: none;">
+                    <div class="evaluation">
+                        <h3>Position Evaluation</h3>
+                        <div class="eval-bar">
+                            <div class="eval-fill" id="eval-fill"></div>
+                        </div>
+                        <p id="eval-score">0.0</p>
+                    </div>
+                    <div class="engine-settings">
+                        <div class="setting-row">
+                            <label for="engine-select">Engine:</label>
+                            <select id="engine-select">
+                                <option value="minimax">Minimax (Material)</option>
+                                <option value="positional">Minimax (Positional)</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label for="depth-select">Depth:</label>
+                            <select id="depth-select">
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4" selected>4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="engine-info">
+                        <p id="engine-status">Click "Analyze" to evaluate position</p>
+                        <button id="analyzeBtn">Analyze Position</button>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="moves-tab" style="display: none;">
+                    <div id="move-list" class="move-list"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-bar">
+            <span id="status">Ready</span>
+            <span id="fen-display"></span>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
